@@ -6,10 +6,10 @@ import { doc, getFirestore, setDoc } from "firebase/firestore";
 import { HiSearch, HiBell, HiChat } from "react-icons/hi";
 import app from "../Shared/firebaseConfig";
 import { useRouter, useSearchParams } from "next/navigation";
-
+import { MdOutlineDarkMode } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher"
-
+import Navbar from "./NavBar"
 function Header() {
 const { t } = useTranslation();
   const { data: session } = useSession();
@@ -49,31 +49,35 @@ const search = searchParams.get("search")
 
   return (
     <div
-      className="flex justify-between 
+      className="flex justify-between
      gap-3 md:gap-2 items-center p-6 "
     >
-      <button
-        className="bg-black
+    
+        <button
+          className="bg-black
          text-white p-3 px-6 rounded-full
          text-[18px] md:text-[25px] lg:text-[30px] xl:text-[35px] 2xl:text-[40px] mb-2 md:mb-0
           "
-        onClick={() => router.push("/")}
-      >
-        {t("Home")}
-      </button>
-      <button
-        className="font-semibold p-3 px-6
+          onClick={() => router.push("/")}
+        >
+          {t("Home")}
+        </button>
+     
+    
+        <button
+          className="font-semibold p-3 px-6
          rounded-full text-[18px] md:text-[25px] lg:text-[30px] xl:text-[35px] 2xl:text-[40px] mb-2 md:mb-0"
-        onClick={() => onCreateClick()}
-      >
-        {t("Create")}
-      </button>
+          onClick={() => onCreateClick()}
+        >
+          {t("Create")}
+        </button>
+   
       <div
         className="bg-[#e9e9e9] p-3 px-6
          gap-3 items-center rounded-full w-full hidden md:flex"
       >
         <HiSearch
-          className="text-[34px] 
+          className="text-[34px]
         text-gray-500"
         />
         <input
@@ -85,10 +89,13 @@ const search = searchParams.get("search")
         />
       </div>
       <HiSearch
-        className="text-[25px] 
+        className="text-[25px]
         text-gray-500 md:hidden"
       />
       <LanguageSwitcher />
+      <div>
+        <MdOutlineDarkMode className="btn" />
+      </div>
 
       {session?.user ? (
         <Image
@@ -113,3 +120,4 @@ const search = searchParams.get("search")
 }
 
 export default Header;
+

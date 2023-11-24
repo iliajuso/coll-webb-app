@@ -1,4 +1,4 @@
-@tailwind base;
+ @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
@@ -19,25 +19,19 @@
 
 .space-x-4 > * + * {
   margin-left: 1rem;
-}
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
-}
+} 
+ body{
+  color: #373737;
+  background: white;
+  transition: all.3s ease;
+ }
+ .dark-mode{
+  color: white;
+  background: #373737;
+ }
+ .btn{
+  width:49px;
+  height:40px;
+ }
 
-/* body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-} */
-body {
-  background-color: #ffffff; 
-  color: #000000; 
-}
+

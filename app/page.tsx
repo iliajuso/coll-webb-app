@@ -6,10 +6,10 @@ import { collection, getDocs, getFirestore, query, where } from "firebase/firest
 import app from "./Shared/firebaseConfig";
 import { useEffect, useState } from "react";
 import PinList from "./components/Pins/PinList";
-import Profile from "./[userId]/page";
-import Header from "./components/Header";
 import { useSearchParams } from "next/navigation";
+
 import { comment } from "postcss";
+import DarkModeToggle from "./components/darkmode";
 export default function Home() {
   const db = getFirestore(app);
   const [listOfPins, setListOfPins] = useState([]);
@@ -40,7 +40,7 @@ export default function Home() {
     <>
       <div className="p-3">
         <div>
-        <PinList listOfPins={listOfPins} searchTerm={search} />
+          <PinList listOfPins={listOfPins} searchTerm={search} />
         </div>
       </div>
     </>

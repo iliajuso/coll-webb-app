@@ -1,6 +1,7 @@
 import app from "@/app/Shared/firebaseConfig";
 import React, { useEffect } from "react";
 import PinItem from "./PinItem"
+import DarkModeToggle from "../darkmode";
 export default function PinList({ listOfPins, searchTerm = "" }) {
   
   const filteredPins = listOfPins.filter((pin) =>

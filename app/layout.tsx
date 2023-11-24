@@ -3,7 +3,7 @@ import { Inter } from 'next/font/google'
 import './globals.css'
 import Header from './components/Header'
 import Provider from './Provider'
-
+import DarkModeToggle from "./components/darkmode"
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
@@ -15,7 +15,7 @@ export default function RootLayout({
   children,
 }: {
   children: React.ReactNode
-}) {
+  }) {
   return (
     <html lang="en">
       <body className={inter.className}>
@@ -23,6 +23,7 @@ export default function RootLayout({
           <Header />
           {children}
         </Provider>
+        <DarkModeToggle/>
       </body>
     </html>
   );

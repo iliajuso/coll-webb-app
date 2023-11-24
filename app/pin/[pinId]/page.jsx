@@ -18,11 +18,14 @@ import PinImage from "./../../components/PinDetail/PinImage";
 import PinInfo from "./../../components/PinDetail/PinInfo";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import app from "@/app/Shared/firebaseConfig";
-import CommentList from "../../components/PinDetail/commentService"; // Import the CommentList component
+import CommentList from "../../components/PinDetail/commentService";
 import { FaRegHeart } from "react-icons/fa";
 import { FcLike } from "react-icons/fc";
 import { GiPlayButton } from "react-icons/gi";
 import { useTranslation } from "react-i18next";
+import { MdDelete } from "react-icons/md";
+import { deleteDoc } from "firebase/firestore";
+import ShareButton from "../../components/PinDetail/PinShare"
 export default function PinDetail({ params }) {
    const { t } = useTranslation();
   const { data: session } = useSession();
@@ -55,7 +58,6 @@ export default function PinDetail({ params }) {
       console.error("Error getting pin detail:", error);
     }
   };
-
   const getLikes = async () => {
     try {
       const likesQuery = query(
@@ -167,17 +169,47 @@ export default function PinDetail({ params }) {
     getPinDetail();
     getComments(); // Fetch comments when the component mounts
   }, [params.pinId]);
+ const handleDeletePin = async () => {
+     try {
+       const pinRef = doc(db, "collections-post", params.pinId);
 
+       // Delete the pin document
+       await deleteDoc(pinRef);
 
+       // Navigate back to the previous page
+       router.back();
+     } catch (error) {
+       console.error("Error deleting pin:", error);
+     }
+  };
+  const handleEditPin = () => {
+    // Navigate to the edit page for the current pin
+    router.push(`/pin-builder/${params.pinId}`);
+  };
   return (
     <>
       {pinDetail ? (
-        <div className="bg-white p-3 md:p-12 rounded-2xl md:px-24 lg:px-36">
+        <div className="bg-white p-3 md:p-12 rounded-2xl md:px-24 lg:px-36 ">
           <HiArrowSmallLeft
             className="text-[60px] font-bold ml-[-50px] cursor-pointer hover:bg-gray-200 rounded-full p-2"
             onClick={() => router.back()}
           />
           <div className="grid grid-cols-1 lg:grid-cols-2 md:gap-10 shadow-lg rounded-2xl p-3 md:p-7 lg:p-12 xl:pd-16">
+            <ShareButton
+              title={pinDetail.title}
+              description={pinDetail.description}
+              url={window.location.href}
+              alt="Share Pin"
+              className="w-8 h-8"
+            />
+            {session && (
+              <MdDelete
+                className="cursor-pointer"
+                onClick={handleDeletePin}
+                alt="Delete Pin"
+              />
+            )}
+           
             <PinImage pinDetail={pinDetail} />
             <div className="">
               <PinInfo pinDetail={pinDetail} />
@@ -191,7 +223,8 @@ export default function PinDetail({ params }) {
                       <button
                         onClick={handleAddLike}
                         className="flex items-center space-x-1 ml-auto"
-                      ><span className="ml-1">{likes.length}</span>
+                      >
+                        <span className="ml-1">{likes.length}</span>
                         {likes.some(
                           (like) => like.userName === session?.user?.name
                         ) ? (
@@ -199,10 +232,8 @@ export default function PinDetail({ params }) {
                         ) : (
                           <FaRegHeart className="w-6 h-6" />
                         )}{" "}
-                        
                       </button>
                     </div>
-                    {/* Comment input and button */}
                     <div className="flex items-center space-x-2">
                       <input
                         type="text"

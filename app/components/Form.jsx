@@ -21,8 +21,8 @@ function Form() {
   const storage = getStorage(app);
   const db = getFirestore(app);
   const postId = Date.now().toString();
-    const onSave = () => {
-      console.log("file", file)
+  const onSave = () => {
+    console.log("file", file);
     setLoading(true);
     uploadFile();
   };
@@ -75,7 +75,7 @@ function Form() {
               className="animate-spin"
             />
           ) : (
-              <span>{t("Save")}</span>
+            <span>{t("Save")}</span>
           )}
         </button>
       </div>
@@ -92,7 +92,7 @@ function Form() {
         border-b-[2px] border-gray-400 placeholder-gray-400"
             />
             <h2 className="text-[12px] mb-8 w-full  text-gray-400">
-             {t("Tell")}
+              {t("Tell")}
             </h2>
             <UserTag user={session?.user} />
             <textarea
