@@ -9,7 +9,7 @@ import { useRouter, useSearchParams } from "next/navigation";
 import { MdOutlineDarkMode } from "react-icons/md";
 import { useTranslation } from "react-i18next";
 import LanguageSwitcher from "./LanguageSwitcher"
-import Navbar from "./NavBar"
+
 function Header() {
 const { t } = useTranslation();
   const { data: session } = useSession();
@@ -18,7 +18,7 @@ const { t } = useTranslation();
   const db = getFirestore(app);
   const [searchTerm, setSearchTerm] = useState("");
  
-  const handleSearchTerm = (value: string) => {
+  const handleSearchTerm = (value) => {
     // router.push({pathname:router.pathname,query:{search:value}})
     router.push(`/?search=${value}`)
   }

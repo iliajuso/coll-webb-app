@@ -1,6 +1,5 @@
 "use client";
 import Image from "next/image";
-
 import { useSession, signIn, signOut } from "next-auth/react";
 import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
 import app from "./Shared/firebaseConfig";
