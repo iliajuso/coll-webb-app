@@ -9,7 +9,7 @@ const handler = NextAuth({
   ],
   secret: process.env.SECRET,
   session: {
-  strategy: "jwt"
+  strategy: "jwt",
 }
 });
 
