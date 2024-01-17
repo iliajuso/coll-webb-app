@@ -1,9 +1,8 @@
 "use client";
-import React,{useEffect, useState} from "react";
+import React from "react";
 import { SessionProvider } from "next-auth/react";
 import { I18nextProvider } from "react-i18next";
 import i18n from "../i18n";
-import Header from "./components/Header";
 function Provider({ children }) {
  
   return (

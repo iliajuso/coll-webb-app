@@ -7,8 +7,6 @@ import { useEffect, useState } from "react";
 import PinList from "./components/Pins/PinList";
 import { useSearchParams } from "next/navigation";
 
-import { comment } from "postcss";
-import DarkModeToggle from "./components/darkmode";
 export default function Home() {
   const db = getFirestore(app);
   const [listOfPins, setListOfPins] = useState([]);
@@ -20,7 +18,8 @@ export default function Home() {
   }, [search]);
 
   const getAllPins = async () => {
-    setListOfPins([]);
+    // setListOfPins([]);
+    const updatedListOfPins = []; 
     const q = search
       ? query(
           collection(db, "collections-post"),
@@ -31,8 +30,10 @@ export default function Home() {
 
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
-      setListOfPins((listOfPins) => [...listOfPins, doc.data()]);
+      // setListOfPins((listOfPins) => [...listOfPins, doc.data()]);
+      updatedListOfPins.push(doc.data());
     });
+    setListOfPins(updatedListOfPins);
   };
 
   return (
